@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { NavigationContainer } from '@react-navigation/native';
 
-import Book from './components/Book';
+import Router from './routes';
 
 const theme = {
 	colors: {
@@ -15,7 +15,7 @@ const App = () => {
 	return (
 		<NavigationContainer>
 			<ThemeProvider theme={theme}>
-				<Book />
+				<Router />
 			</ThemeProvider>
 		</NavigationContainer>
 	);
