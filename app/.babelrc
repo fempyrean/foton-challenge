@@ -7,7 +7,10 @@
 				"root": ["./"],
 				"alias": {
 					"@pages": "./src/pages",
-					"@components": "./src/components"
+					"@components": "./src/components",
+					"@redux": "./src/redux",
+					"@features": "./src/features",
+					"@services": "./src/services"
 				}
 			}
 		]
