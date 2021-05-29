@@ -23,6 +23,7 @@
 		DC82AB4680544C94B80082E2 /* SFProText-RegularItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BCF15FDE3034C52BD953ECE /* SFProText-RegularItalic.ttf */; };
 		F8C9508F9C4D44509AD953EC /* SFProText-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4BCC7CA23D74CB6A71B7F64 /* SFProText-Semibold.ttf */; };
 		3A08ADEE635D43B2B72E6586 /* SFProText-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D34852AD4A5249EA8666A529 /* SFProText-SemiboldItalic.ttf */; };
+		D26037445D7F474A968A3293 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33E3AB8BD6194E8593E78B57 /* Roboto-Black.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		9BCF15FDE3034C52BD953ECE /* SFProText-RegularItalic.ttf */ = {isa = PBXFileReference; name = "SFProText-RegularItalic.ttf"; path = "../src/assets/fonts/SFProText-RegularItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		A4BCC7CA23D74CB6A71B7F64 /* SFProText-Semibold.ttf */ = {isa = PBXFileReference; name = "SFProText-Semibold.ttf"; path = "../src/assets/fonts/SFProText-Semibold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		D34852AD4A5249EA8666A529 /* SFProText-SemiboldItalic.ttf */ = {isa = PBXFileReference; name = "SFProText-SemiboldItalic.ttf"; path = "../src/assets/fonts/SFProText-SemiboldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		33E3AB8BD6194E8593E78B57 /* Roboto-Black.ttf */ = {isa = PBXFileReference; name = "Roboto-Black.ttf"; path = "../src/assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 				9BCF15FDE3034C52BD953ECE /* SFProText-RegularItalic.ttf */,
 				A4BCC7CA23D74CB6A71B7F64 /* SFProText-Semibold.ttf */,
 				D34852AD4A5249EA8666A529 /* SFProText-SemiboldItalic.ttf */,
+				33E3AB8BD6194E8593E78B57 /* Roboto-Black.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				DC82AB4680544C94B80082E2 /* SFProText-RegularItalic.ttf in Resources */,
 				F8C9508F9C4D44509AD953EC /* SFProText-Semibold.ttf in Resources */,
 				3A08ADEE635D43B2B72E6586 /* SFProText-SemiboldItalic.ttf in Resources */,
+				D26037445D7F474A968A3293 /* Roboto-Black.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
