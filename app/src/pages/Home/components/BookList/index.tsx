@@ -48,7 +48,7 @@ const BookList = () => {
 			-1,
 			0,
 			ROUGH_ITEM_HEIGHT * rowIndex,
-			ROUGH_ITEM_HEIGHT * Math.round(rowIndex + 0.9),
+			ROUGH_ITEM_HEIGHT * Math.round(rowIndex + 0.5),
 		];
 
 		const opacity = scrollY.interpolate({

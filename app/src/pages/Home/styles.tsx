@@ -6,6 +6,7 @@ import { getTitleFont, getTitleColor } from './utils';
 export const Container = styled.View`
 	padding: 20px;
 	padding-top: 50px;
+	background: #fffcf9;
 `;
 
 export const Title = styled.Text<{ variant?: string }>`

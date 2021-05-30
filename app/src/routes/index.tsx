@@ -1,7 +1,7 @@
 import React from 'react';
 
 import AuthRoutes from './Auth.routes';
-import Home from '@pages/Home';
+import AppRoutes from './App.routes';
 
 import { useAppSelector } from '@redux/hooks';
 import { selectUser } from '@features/auth/auth.slice';
@@ -9,7 +9,7 @@ import { selectUser } from '@features/auth/auth.slice';
 const Routes = () => {
 	const user = useAppSelector(selectUser);
 
-	return user ? <Home /> : <AuthRoutes />;
+	return user ? <AppRoutes /> : <AuthRoutes />;
 };
 
 export default Routes;
