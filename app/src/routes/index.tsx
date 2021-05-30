@@ -3,9 +3,12 @@ import React from 'react';
 import AuthRoutes from './Auth.routes';
 import Home from '@pages/Home';
 
-const user = false;
+import { useAppSelector } from '@redux/hooks';
+import { selectUser } from '@features/auth/auth.slice';
 
 const Routes = () => {
+	const user = useAppSelector(selectUser);
+
 	return user ? <Home /> : <AuthRoutes />;
 };
 
