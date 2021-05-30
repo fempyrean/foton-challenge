@@ -25,4 +25,8 @@ export class BooksService {
 
     return book;
   }
+
+  async getAll(): Promise<Book[]> {
+    return this.bookRepository.find();
+  }
 }
