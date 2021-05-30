@@ -2,23 +2,24 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 import { hexToRGB } from '../../utils';
+import { BookProps } from './utils';
 
 const Container = styled.View`
 	width: 105px;
+	height: 200px;
 `;
 const Cover = styled.View`
 	height: 153px;
-	padding: 1px;
 	elevation: 5;
 `;
 const Footer = styled.View`
 	margin: 9px 0px;
 `;
 
-const BookCover = styled.Image.attrs(() => ({
-	source: { uri: 'https://bit.ly/3vDbehy' },
+const BookCover = styled.Image.attrs(({ cover }: any) => ({
+	source: { uri: cover },
 	resizeMode: 'cover',
-}))`
+}))<{ cover: string }>`
 	flex: 1;
 	border-radius: 5px;
 `;
@@ -39,15 +40,15 @@ const Author = styled.Text.attrs(() => ({
 	color: ${({ theme }) => hexToRGB(theme.colors.d10, 0.8)};
 `;
 
-const Book = () => {
+const Book = ({ title, author, cover }: BookProps) => {
 	return (
 		<Container>
 			<Cover>
-				<BookCover />
+				<BookCover cover={cover} />
 			</Cover>
 			<Footer>
-				<Title>The Fellowship of the Ring</Title>
-				<Author>by J.R.R. Tolkien</Author>
+				<Title>{title}</Title>
+				<Author>by {author}</Author>
 			</Footer>
 		</Container>
 	);
