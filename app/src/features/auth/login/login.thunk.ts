@@ -1,10 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import login from '@services/user/login';
-import {
-	LoginReject,
-	LoginResponse,
-	UserCredentials,
-} from './login.interfaces';
+import { UserCredentials } from './login.interfaces';
 
 export const userLogin = createAsyncThunk(
 	'user/login',
@@ -16,7 +12,7 @@ export const userLogin = createAsyncThunk(
 			if (err?.response?.status === 401) {
 				return thunkAPI.rejectWithValue({
 					message:
-						'Username/Password combination is invalid. Plase try again.',
+						'Username/Password combination is invalid. Please try again.',
 				});
 			}
 			return thunkAPI.rejectWithValue({

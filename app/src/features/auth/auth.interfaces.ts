@@ -5,9 +5,6 @@ export interface User {
 	firstName: string;
 	lastName: string;
 	email: string;
-	createdAt: string;
-	updatedAt: string;
-	deletedAt?: string | null;
 }
 
 export interface AuthState {

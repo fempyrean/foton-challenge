@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '../../redux/root-reducer';
 import { UserStatus } from './auth.enums';
 import { AuthState } from './auth.interfaces';
+import { LoginReject, LoginResponse } from './login/login.interfaces';
 
 import { userLogin } from './login/login.thunk';
 
@@ -26,22 +27,31 @@ export const authSlice = createSlice({
 		unsetMessage: (state) => {
 			state.message = undefined;
 		},
-		extraReducers: (builder) =>
-			builder
-				.addCase(userLogin.fulfilled, (state, { payload }) => {
-					return { ...payload, status: UserStatus.SUCCESS };
-				})
-				.addCase(userLogin.pending, (state) => {
-					state.status = UserStatus.FETCHING;
-				})
-				.addCase(userLogin.rejected, (state, { payload }) => {
-					return { ...payload, status: UserStatus.ERROR };
-				}),
+		setToken: (state, { payload }) => {
+			state.token = payload;
+		},
 	},
+	extraReducers: (builder) =>
+		builder
+			.addCase(userLogin.fulfilled, (state, { payload }) => {
+				return { ...payload, status: UserStatus.SUCCESS };
+			})
+			.addCase(userLogin.pending, (state) => {
+				state.status = UserStatus.FETCHING;
+			})
+			.addCase(userLogin.rejected, (state, { payload }) => {
+				const TPayload = payload as LoginReject;
+				return { ...TPayload, status: UserStatus.ERROR };
+			}),
 });
 
-export const { unsetUser, unsetUserWithMessage, setMessage, unsetMessage } =
-	authSlice.actions;
+export const {
+	unsetUser,
+	unsetUserWithMessage,
+	setMessage,
+	unsetMessage,
+	setToken,
+} = authSlice.actions;
 
 export const selectUser = ({ auth }: RootState) => auth.user;
 
