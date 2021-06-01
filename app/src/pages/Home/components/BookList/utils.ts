@@ -11,9 +11,14 @@
  *
  * Gambiarration but it works ¯\_(ツ)_/¯
  */
-export const getItemAlignment = (pos: number) => {
+export const getItemAlignment = (pos: number, length: number) => {
 	const alignments = ['flex-start', 'center', 'flex-end'];
 	let alignment = 'flex-start';
+
+	/** Edgecases */
+	if (length <= 2) {
+		return 'center';
+	}
 
 	for (let i = 0; i <= pos; i++) {
 		if (i === 0) {

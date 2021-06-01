@@ -8,7 +8,9 @@ import Router from './routes';
 const theme = {
 	colors: {
 		bg: '#F2F2F2',
+		buttonBg: '#FF6978',
 		light20: '#FDFCFC',
+		light90: '#FFFFFF',
 		d0: '#BFBEBF',
 		d10: '#313131',
 		d20: '#54565A',

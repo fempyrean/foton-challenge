@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { useNavigation } from '@react-navigation/native';
 
 import { hexToRGB } from '../../utils';
 import { BookProps } from './utils';
 
-const Container = styled.View`
+const Container = styled.TouchableOpacity.attrs({
+	activeOpacity: 0.8,
+})`
 	width: 105px;
 	height: 200px;
 `;
@@ -41,8 +44,14 @@ const Author = styled.Text.attrs(() => ({
 `;
 
 const Book = ({ title, author, cover }: BookProps) => {
+	const navigation = useNavigation();
+
+	const handleBookPress = () => {
+		navigation.navigate('Details');
+	};
+
 	return (
-		<Container>
+		<Container onPress={handleBookPress}>
 			<Cover>
 				<BookCover cover={cover} />
 			</Cover>

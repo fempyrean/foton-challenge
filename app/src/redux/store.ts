@@ -8,6 +8,7 @@ import { PersistPartial } from 'redux-persist/lib/persistReducer';
 const persistConfig = {
 	key: 'foton-challenge',
 	storage: AsyncStorage,
+	whitelist: ['auth'],
 };
 
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducer);

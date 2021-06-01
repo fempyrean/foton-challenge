@@ -1,42 +1,33 @@
 import React from 'react';
-import styled from 'styled-components/native';
-import Icon from 'react-native-vector-icons/Foundation';
 
-const Container = styled.TouchableOpacity`
-	flex-direction: row;
-	align-items: center;
-	padding-left: 22px;
-	padding-right: 22px;
-	border-radius: 10px;
-	height: 48px;
-	background: ${({ theme: { colors } }) => colors.light20};
-	elevation: 4;
-`;
-
-const SearchIcon = styled(Icon).attrs({
-	name: 'magnifying-glass',
-	size: 26,
-	color: 'rgba(0,0,0,0.2)',
-})`
-	padding: 3px;
-`;
-
-const Input = styled.TextInput.attrs(() => ({
-	placeholder: 'Search book',
-}))`
-	flex: 1;
-	font-size: 16px;
-	line-height: 18px;
-	padding-left: 10px;
-`;
+import { Container, SearchIcon, ClearIcon, Input } from './styles';
+import { useAppDispatch, useAppSelector } from '@redux/hooks';
+import { loadInitialBooks } from '@features/book/book.thunk';
+import {
+	setSearch as setGlobalSearch,
+	unsetSearch,
+} from '@features/book/book.slice';
 
 const SearchBar = () => {
+	const dispatch = useAppDispatch();
+	const { search: globalSearch } = useAppSelector(({ books }) => books);
+
 	const placeholderFontFamily = 'SFProText-Regular';
 	const valueFontFamily = 'SFProText-Heavy';
-	const [search, setSearch] = React.useState<string>('');
+	const [search, setSearch] = React.useState<string>(globalSearch);
 	const [fontFamily, setFontFamily] = React.useState<string>(
 		placeholderFontFamily,
 	);
+
+	const searchBook = async () => {
+		dispatch(setGlobalSearch(search));
+		await dispatch(loadInitialBooks(search));
+	};
+	const clearSearch = async () => {
+		dispatch(unsetSearch());
+		setSearch('');
+		await dispatch(loadInitialBooks(''));
+	};
 
 	return (
 		<Container>
@@ -55,7 +46,9 @@ const SearchBar = () => {
 				value={search}
 				onChangeText={setSearch}
 				style={{ fontFamily }}
+				onEndEditing={searchBook}
 			/>
+			{search ? <ClearIcon onPress={clearSearch} /> : null}
 		</Container>
 	);
 };

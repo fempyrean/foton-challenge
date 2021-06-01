@@ -1,54 +1,44 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Animated, FlatList } from 'react-native';
+import { ActivityIndicator, Animated, FlatList } from 'react-native';
 
+/** Redux */
+import { Book as IBook } from '@features/book/book.interfaces';
+import { useAppSelector, useAppDispatch } from '@redux/hooks';
+import { selectBooks } from '@features/book/book.slice';
+import { loadInitialBooks } from '@features/book/book.thunk';
+/** Components */
 import Book from '@components/Book';
+import { EmptyBookList, ErrorBookList, Footer } from './styles';
 import { getItemAlignment } from './utils';
+import { BookStatus } from '@features/book/book.enums';
 
-const bookData = {
-	title: 'The Fellowship of the Ring',
-	author: 'J.R.R. Tolkien',
-	cover: 'https://bit.ly/3vDbehy',
-};
-const data = [
-	bookData,
-	bookData,
-	bookData,
-	bookData,
-	bookData,
-	bookData,
-	bookData,
-	bookData,
-	bookData,
-	bookData,
-	bookData,
-	bookData,
-];
-interface Book {
-	title: string;
-	author: string;
-	cover: string;
-}
+const ITEM_HEIGHT = 200;
 
 const ItemContainer = styled(Animated.View)<{ alignment: string }>`
 	flex: 1;
 	align-items: ${({ alignment }) => alignment};
 `;
 
-const ROUGH_ITEM_HEIGHT = 200;
-
 const BookList = () => {
+	const dispatch = useAppDispatch();
+	const books = useAppSelector(selectBooks);
+	const { status } = useAppSelector(({ books }) => books);
 	const scrollY = React.useRef(new Animated.Value(0)).current;
+
+	React.useEffect(() => {
+		dispatch(loadInitialBooks(''));
+	}, []);
 
 	const renderBook = ({ item, index }: any) => {
 		const rowIndex = Math.floor(index / 3);
-		const { title, author, cover } = item as Book;
+		const { name, author, cover } = item as IBook;
 
 		const opacityInputRange = [
 			-1,
 			0,
-			ROUGH_ITEM_HEIGHT * rowIndex,
-			ROUGH_ITEM_HEIGHT * Math.round(rowIndex + 0.5),
+			ITEM_HEIGHT * rowIndex,
+			ITEM_HEIGHT * Math.round(rowIndex + 0.5),
 		];
 
 		const opacity = scrollY.interpolate({
@@ -58,26 +48,29 @@ const BookList = () => {
 
 		return (
 			<ItemContainer
-				alignment={getItemAlignment(index)}
+				alignment={getItemAlignment(index, books.length)}
 				style={{ opacity }}
 			>
-				<Book title={title} author={author} cover={cover} />
+				<Book title={name} author={author} cover={cover} />
 			</ItemContainer>
 		);
 	};
 
+	if (status === BookStatus.ERROR) return <ErrorBookList />;
+	if (status !== BookStatus.FETCHING && books.length <= 0)
+		return <EmptyBookList />;
+
 	return (
 		<>
 			<Animated.FlatList
-				data={data}
+				ListEmptyComponent={<EmptyBookList />}
+				ListFooterComponent={<Footer />}
+				data={books}
 				renderItem={renderBook}
 				keyExtractor={(item, index) => String(index)}
 				horizontal={false}
 				numColumns={3}
 				showsVerticalScrollIndicator={false}
-				contentContainerStyle={{
-					paddingBottom: ROUGH_ITEM_HEIGHT + ROUGH_ITEM_HEIGHT / 2,
-				}}
 				onScroll={Animated.event(
 					[{ nativeEvent: { contentOffset: { y: scrollY } } }],
 					{ useNativeDriver: true },

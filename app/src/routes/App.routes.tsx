@@ -1,10 +1,33 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+	createStackNavigator,
+	TransitionPresets,
+} from '@react-navigation/stack';
 import { useTheme } from 'styled-components';
 import Icon from 'react-native-vector-icons/Feather';
 
 import Home from '@pages/Home';
+import Details from '@pages/BookDetails';
 import AddBook from '@pages/AddBook';
+
+const HomeStack = createStackNavigator();
+const getHomeStack = () => {
+	return (
+		<HomeStack.Navigator
+			screenOptions={{
+				headerShown: false,
+			}}
+		>
+			<HomeStack.Screen name="Search" component={Home} />
+			<HomeStack.Screen
+				name="Details"
+				component={Details}
+				options={{ ...TransitionPresets.RevealFromBottomAndroid }}
+			/>
+		</HomeStack.Navigator>
+	);
+};
 
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +50,7 @@ const AppRoutes = () => {
 		>
 			<Tab.Screen
 				name="Home"
-				component={Home}
+				component={getHomeStack}
 				options={{
 					tabBarIcon: ({ focused }) => (
 						<Icon

@@ -1,9 +1,9 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '../../redux/root-reducer';
 import { UserStatus } from './auth.enums';
 import { AuthState } from './auth.interfaces';
-import { LoginReject, LoginResponse } from './login/login.interfaces';
+import { LoginReject } from './login/login.interfaces';
 
 import { userLogin } from './login/login.thunk';
 
