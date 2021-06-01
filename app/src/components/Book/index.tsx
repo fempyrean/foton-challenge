@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { useNavigation } from '@react-navigation/native';
 
 import { hexToRGB } from '../../utils';
 import { BookProps } from './utils';
@@ -43,15 +42,9 @@ const Author = styled.Text.attrs(() => ({
 	color: ${({ theme }) => hexToRGB(theme.colors.d10, 0.8)};
 `;
 
-const Book = ({ title, author, cover }: BookProps) => {
-	const navigation = useNavigation();
-
-	const handleBookPress = () => {
-		navigation.navigate('Details');
-	};
-
+const Book = ({ title, author, cover, onPress }: BookProps) => {
 	return (
-		<Container onPress={handleBookPress}>
+		<Container onPress={onPress}>
 			<Cover>
 				<BookCover cover={cover} />
 			</Cover>
