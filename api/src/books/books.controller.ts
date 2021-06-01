@@ -1,10 +1,11 @@
-import { Body, Controller, Post, Get, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, Get, UseGuards, Query } from '@nestjs/common';
 
 import { GetUser } from 'src/auth/session.decorators';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 import { BooksService } from './books.service';
 import { Book } from './book.entity';
 import { CreateBookDTO } from './dto/create-book.dto';
+import { BookPagination, BookSearchParameters } from './book.interfaces';
 
 @Controller('books')
 class BooksController {
@@ -20,8 +21,10 @@ class BooksController {
   }
 
   @Get()
-  async getBooks(): Promise<Book[]> {
-    return this.booksService.getAll();
+  async getBooks(
+    @Query() query: BookSearchParameters,
+  ): Promise<BookPagination> {
+    return this.booksService.getAll(query);
   }
 }
 
