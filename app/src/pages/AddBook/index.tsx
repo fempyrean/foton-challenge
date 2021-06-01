@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigation } from '@react-navigation/native';
 
 import { Container, Title, Scrollable, Button } from './styles';
 import Input from '@components/Input';
@@ -18,6 +19,7 @@ const schema = z.object({
 });
 
 const AddBook = () => {
+	const navigation = useNavigation();
 	const dispatch = useAppDispatch();
 	const { status } = useAppSelector(({ books }) => books);
 
@@ -29,6 +31,7 @@ const AddBook = () => {
 
 	const onSubmit = async (data: AddBookDTO) => {
 		await dispatch(addBook(data));
+		navigation.goBack();
 	};
 
 	return (
