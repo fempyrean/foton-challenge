@@ -27,9 +27,6 @@ export const authSlice = createSlice({
 		unsetMessage: (state) => {
 			state.message = undefined;
 		},
-		setToken: (state, { payload }) => {
-			state.token = payload;
-		},
 	},
 	extraReducers: (builder) =>
 		builder
@@ -45,13 +42,8 @@ export const authSlice = createSlice({
 			}),
 });
 
-export const {
-	unsetUser,
-	unsetUserWithMessage,
-	setMessage,
-	unsetMessage,
-	setToken,
-} = authSlice.actions;
+export const { unsetUser, unsetUserWithMessage, setMessage, unsetMessage } =
+	authSlice.actions;
 
 export const selectUser = ({ auth }: RootState) => auth.user;
 

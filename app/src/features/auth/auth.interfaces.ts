@@ -10,6 +10,6 @@ export interface User {
 export interface AuthState {
 	status: UserStatus;
 	user?: User;
-	token?: string;
+	access_token?: string;
 	message?: string;
 }

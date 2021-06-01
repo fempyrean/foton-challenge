@@ -40,6 +40,7 @@ const Input = ({
 				value={field.value}
 				onChangeText={field.onChange}
 				error={error}
+				autoCorrect={false}
 				{...props}
 			/>
 		</>

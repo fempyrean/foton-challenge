@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '@redux/root-reducer';
 import { BookStatus } from './book.enums';
 import { BooksState, BookReject } from './book.interfaces';
-import { loadInitialBooks, loadMoreBooks } from './book.thunk';
+import { loadInitialBooks, loadMoreBooks, addBook } from './book.thunk';
 import Book from '@components/Book';
 
 const initialState: BooksState = {
@@ -53,6 +53,23 @@ export const bookSlice = createSlice({
 					meta,
 					status: BookStatus.SUCCESS,
 				};
+			})
+			.addCase(addBook.fulfilled, (state, { payload }) => {
+				const updatedBooks = [payload, ...state.books];
+
+				return {
+					...state,
+					books: updatedBooks,
+					status: BookStatus.SUCCESS,
+				};
+			})
+			.addCase(addBook.pending, (state) => {
+				state.status = BookStatus.FETCHING;
+			})
+			.addCase(addBook.rejected, (state, { payload }) => {
+				const { message } = payload as BookReject;
+				state.message = message;
+				state.status = BookStatus.ERROR;
 			}),
 });
 

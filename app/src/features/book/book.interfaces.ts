@@ -40,3 +40,10 @@ export interface FetchBooksParameters {
 	page: number;
 	search: string;
 }
+
+export interface AddBookDTO {
+	name: string;
+	author: string;
+	cover: string;
+	description: string;
+}

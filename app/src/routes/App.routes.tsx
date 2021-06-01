@@ -10,6 +10,10 @@ import Icon from 'react-native-vector-icons/Feather';
 import Home from '@pages/Home';
 import Details from '@pages/BookDetails';
 import AddBook from '@pages/AddBook';
+import authInterceptor from '@features/auth/auth.interceptor';
+
+import api from '@services/api';
+import store from '@redux/store';
 
 const HomeTabs = createBottomTabNavigator();
 const getHomeTabs = () => {
@@ -75,6 +79,8 @@ const getHomeTabs = () => {
 
 const Stack = createStackNavigator();
 const AppRoutes = () => {
+	authInterceptor(store, api);
+
 	return (
 		<Stack.Navigator
 			screenOptions={{

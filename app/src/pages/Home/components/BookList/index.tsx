@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { ActivityIndicator, Animated, FlatList } from 'react-native';
+import { Animated } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 /** Redux */
 import { Book as IBook } from '@features/book/book.interfaces';
@@ -21,6 +22,7 @@ const ItemContainer = styled(Animated.View)<{ alignment: string }>`
 `;
 
 const BookList = () => {
+	const navigation = useNavigation();
 	const dispatch = useAppDispatch();
 	const books = useAppSelector(selectBooks);
 	const { status } = useAppSelector(({ books }) => books);
@@ -51,7 +53,14 @@ const BookList = () => {
 				alignment={getItemAlignment(index, books.length)}
 				style={{ opacity }}
 			>
-				<Book title={name} author={author} cover={cover} />
+				<Book
+					title={name}
+					author={author}
+					cover={cover}
+					onPress={() =>
+						navigation.navigate('Details', { book: item })
+					}
+				/>
 			</ItemContainer>
 		);
 	};
