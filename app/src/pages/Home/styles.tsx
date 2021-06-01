@@ -4,18 +4,12 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { getTitleFont, getTitleColor } from './utils';
 
-// <LinearGradient
-// 	colors={['#f00', '#fefbf8', '#fffcf9']}
-// 	style={{ flex: 1 }}
-// >
-
 export const Container = styled(LinearGradient).attrs({
 	colors: ['#fefbf8', '#fffcf9'],
 })`
 	flex: 1;
 	padding: 0px 20px;
 	padding-top: 50px;
-	/* background: #fffbf8; */
 `;
 
 export const Title = styled.Text<{ variant?: string }>`
