@@ -11,31 +11,12 @@ import Home from '@pages/Home';
 import Details from '@pages/BookDetails';
 import AddBook from '@pages/AddBook';
 
-const HomeStack = createStackNavigator();
-const getHomeStack = () => {
-	return (
-		<HomeStack.Navigator
-			screenOptions={{
-				headerShown: false,
-			}}
-		>
-			<HomeStack.Screen name="Search" component={Home} />
-			<HomeStack.Screen
-				name="Details"
-				component={Details}
-				options={{ ...TransitionPresets.RevealFromBottomAndroid }}
-			/>
-		</HomeStack.Navigator>
-	);
-};
-
-const Tab = createBottomTabNavigator();
-
-const AppRoutes = () => {
+const HomeTabs = createBottomTabNavigator();
+const getHomeTabs = () => {
 	const { colors } = useTheme();
 
 	return (
-		<Tab.Navigator
+		<HomeTabs.Navigator
 			tabBarOptions={{
 				activeTintColor: colors.d10,
 				inactiveTintColor: colors.d0,
@@ -48,9 +29,9 @@ const AppRoutes = () => {
 				style: { height: 59 },
 			}}
 		>
-			<Tab.Screen
+			<HomeTabs.Screen
 				name="Home"
-				component={getHomeStack}
+				component={Home}
 				options={{
 					tabBarIcon: ({ focused }) => (
 						<Icon
@@ -61,7 +42,7 @@ const AppRoutes = () => {
 					),
 				}}
 			/>
-			<Tab.Screen
+			<HomeTabs.Screen
 				name="AddBook"
 				component={AddBook}
 				options={{
@@ -75,7 +56,7 @@ const AppRoutes = () => {
 					tabBarLabel: 'Add book',
 				}}
 			/>
-			<Tab.Screen
+			<HomeTabs.Screen
 				name="Profile"
 				component={AddBook}
 				options={{
@@ -88,7 +69,27 @@ const AppRoutes = () => {
 					),
 				}}
 			/>
-		</Tab.Navigator>
+		</HomeTabs.Navigator>
+	);
+};
+
+const Stack = createStackNavigator();
+const AppRoutes = () => {
+	return (
+		<Stack.Navigator
+			screenOptions={{
+				headerShown: false,
+			}}
+		>
+			<Stack.Screen name="Home" component={getHomeTabs} />
+			<Stack.Screen
+				name="Details"
+				component={Details}
+				options={{
+					...TransitionPresets.ModalSlideFromBottomIOS,
+				}}
+			/>
+		</Stack.Navigator>
 	);
 };
 
