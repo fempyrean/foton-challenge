@@ -16,7 +16,7 @@ export const authSlice = createSlice({
 	initialState,
 	reducers: {
 		unsetUser: (state) => {
-			state = initialState;
+			return { ...initialState };
 		},
 		unsetUserWithMessage: (state, { payload }) => {
 			return { ...initialState, message: payload };
