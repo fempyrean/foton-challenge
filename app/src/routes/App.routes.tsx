@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import Home from '@pages/Home';
 import Details from '@pages/BookDetails';
 import AddBook from '@pages/AddBook';
+import Profile from '@pages/Profile';
 import authInterceptor from '@features/auth/auth.interceptor';
 
 import api from '@services/api';
@@ -62,7 +63,7 @@ const getHomeTabs = () => {
 			/>
 			<HomeTabs.Screen
 				name="Profile"
-				component={AddBook}
+				component={Profile}
 				options={{
 					tabBarIcon: ({ focused }) => (
 						<Icon
