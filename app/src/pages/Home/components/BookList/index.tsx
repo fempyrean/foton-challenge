@@ -13,6 +13,8 @@ import Book from '@components/Book';
 import { EmptyBookList, ErrorBookList, Footer } from './styles';
 import { getItemAlignment } from './utils';
 import { BookStatus } from '@features/book/book.enums';
+import SearchBar from '../SearchBar';
+import { PageTitle } from '../../styles';
 
 const ITEM_HEIGHT = 200;
 
@@ -21,7 +23,7 @@ const ItemContainer = styled(Animated.View)<{ alignment: string }>`
 	align-items: ${({ alignment }) => alignment};
 `;
 
-const BookList = () => {
+const BookList = ({ name }: any) => {
 	const navigation = useNavigation();
 	const dispatch = useAppDispatch();
 	const books = useAppSelector(selectBooks);
@@ -40,7 +42,7 @@ const BookList = () => {
 			-1,
 			0,
 			ITEM_HEIGHT * rowIndex,
-			ITEM_HEIGHT * Math.round(rowIndex + 0.5),
+			(ITEM_HEIGHT + ITEM_HEIGHT) * (rowIndex + 0.65),
 		];
 
 		const opacity = scrollY.interpolate({
@@ -66,14 +68,18 @@ const BookList = () => {
 	};
 
 	if (status === BookStatus.ERROR) return <ErrorBookList />;
-	if (status !== BookStatus.FETCHING && books.length <= 0)
-		return <EmptyBookList />;
 
 	return (
 		<>
 			<Animated.FlatList
 				ListEmptyComponent={<EmptyBookList />}
 				ListFooterComponent={<Footer />}
+				ListHeaderComponent={
+					<>
+						<SearchBar />
+						<PageTitle name={name} />
+					</>
+				}
 				data={books}
 				renderItem={renderBook}
 				keyExtractor={(item, index) => String(index)}

@@ -13,9 +13,7 @@ const Home = () => {
 
 	return (
 		<Container>
-			<SearchBar />
-			<PageTitle name={firstName} />
-			<BookList />
+			<BookList name={firstName} />
 		</Container>
 	);
 };

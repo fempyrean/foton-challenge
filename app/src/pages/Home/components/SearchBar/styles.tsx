@@ -9,7 +9,7 @@ export const Container = styled.TouchableOpacity`
 	border-radius: 10px;
 	height: 48px;
 	background: ${({ theme: { colors } }) => colors.light20};
-	elevation: 4;
+	elevation: 2;
 `;
 
 export const SearchIcon = styled(Icon).attrs({

@@ -4,7 +4,6 @@ import { RootState } from '@redux/root-reducer';
 import { BookStatus } from './book.enums';
 import { BooksState, BookReject } from './book.interfaces';
 import { loadInitialBooks, loadMoreBooks, addBook } from './book.thunk';
-import Book from '@components/Book';
 
 const initialState: BooksState = {
 	status: BookStatus.IDLE,
@@ -53,6 +52,9 @@ export const bookSlice = createSlice({
 					meta,
 					status: BookStatus.SUCCESS,
 				};
+			})
+			.addCase(loadMoreBooks.pending, (state) => {
+				state.status = BookStatus.FETCHING;
 			})
 			.addCase(addBook.fulfilled, (state, { payload }) => {
 				const updatedBooks = [payload, ...state.books];

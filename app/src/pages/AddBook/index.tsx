@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { Container, Title, Scrollable, Button } from './styles';
 import Input from '@components/Input';
@@ -10,6 +10,10 @@ import { useAppSelector, useAppDispatch } from '@redux/hooks';
 import { BookStatus } from '@features/book/book.enums';
 import { AddBookDTO } from '@features/book/book.interfaces';
 import { addBook } from '@features/book/book.thunk';
+
+interface RouteParams {
+	useGlobalSearchAsName?: boolean;
+}
 
 const schema = z.object({
 	name: z.string().min(1),
@@ -20,18 +24,29 @@ const schema = z.object({
 
 const AddBook = () => {
 	const navigation = useNavigation();
+	const route = useRoute();
+	const { useGlobalSearchAsName } = (route.params ?? {}) as RouteParams;
 	const dispatch = useAppDispatch();
-	const { status } = useAppSelector(({ books }) => books);
+	const { status, search } = useAppSelector(({ books }) => books);
 
 	const {
 		control,
+		setValue,
 		handleSubmit,
+		reset,
 		formState: { errors },
-	} = useForm({ resolver: zodResolver(schema) });
+	} = useForm({
+		resolver: zodResolver(schema),
+	});
+
+	React.useEffect(() => {
+		if (useGlobalSearchAsName) setValue('name', search);
+	}, []);
 
 	const onSubmit = async (data: AddBookDTO) => {
 		await dispatch(addBook(data));
-		navigation.goBack();
+		navigation.navigate('Home');
+		reset();
 	};
 
 	return (
