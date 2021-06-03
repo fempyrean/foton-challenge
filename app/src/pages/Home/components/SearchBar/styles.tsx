@@ -7,6 +7,7 @@ export const Container = styled.TouchableOpacity`
 	padding-left: 22px;
 	padding-right: 22px;
 	border-radius: 10px;
+	margin-top: 50px;
 	height: 48px;
 	background: ${({ theme: { colors } }) => colors.light20};
 	elevation: 2;

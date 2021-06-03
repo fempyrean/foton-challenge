@@ -9,7 +9,7 @@ export const Container = styled(LinearGradient).attrs({
 })`
 	flex: 1;
 	padding: 0px 20px;
-	padding-top: 50px;
+	/* padding-top: 50px; */
 `;
 
 export const Title = styled.Text<{ variant?: string }>`

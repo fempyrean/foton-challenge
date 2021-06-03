@@ -74,7 +74,7 @@ const Login = () => {
 				label="E-mail"
 				name="email"
 				control={control}
-				autoCapitalize="words"
+				autoCapitalize="none"
 				error={errors.email}
 			/>
 			<Input
@@ -92,7 +92,7 @@ const Login = () => {
 				label="E-mail"
 				name="email"
 				control={control}
-				autoCapitalize="words"
+				autoCapitalize="none"
 				error={errors.email}
 			/>
 			<Input
