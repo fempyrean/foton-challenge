@@ -2,6 +2,7 @@ import React from 'react';
 import { StatusBar } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 import { NavigationContainer } from '@react-navigation/native';
+import RNBootSplash from 'react-native-bootsplash';
 import ReduxProvider from '@redux/provider';
 
 import Router from './routes';
@@ -29,9 +30,11 @@ const theme = {
 const App = () => {
 	return (
 		<ReduxProvider>
-			<NavigationContainer>
+			<NavigationContainer
+				onReady={() => RNBootSplash.hide({ fade: true })}
+			>
 				<ThemeProvider theme={theme}>
-					<StatusBar translucent backgroundColor="transparent" />
+					<StatusBar barStyle="dark-content" />
 					<Router />
 				</ThemeProvider>
 			</NavigationContainer>
